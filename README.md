@@ -3,8 +3,8 @@
 This program parallelizes a sequential version of a two-dimensional wave diffusion program, using a hybrid form of MPI and OpenMPI. The formula was based on Schroedinger's Wave Dissemination.
 
 
-#### Parallize Strategy
-MPI:
+## Parallize Strategy
+#### MPI:
 
 Allocate each rank a whole z[3][size][size] size;
 
@@ -16,19 +16,20 @@ When exchanging information, the odd ranks send their left and right information
 
 If needs printing, ranks which are not 0, send its data to rank 0.
 
-Open MP:
+#### Open MP:
 
 When each rank is calculating, parallelize the calculation each step. After each step is done, when each rank is exchanging information, it will not be parallelized.
 
 
-#### Performance Evaluation
+## Performance Evaluation
 The performance improves 4.73 times with 4 machines, each has 4 multi-threads compares to sequential program
 
 
-#### Limitations and Possible Performance Improvement
-Limitations:  When printing out the result, the performance is not improved.
-Performance Improvement: 
+## Limitations and Possible Performance Improvement
+#### Limitations:  When printing out the result, the performance is not improved.
+#### Performance Improvement: 
 Use one of the threads to print, other threads still can calculate.
+
 For all the ranks, use one thread to deal with the boundary information exchanging and then calculate the boundaries, other threads can work on unboundary calcs.
 
 
